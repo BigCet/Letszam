@@ -2,7 +2,6 @@ import os,json, openpyxl
 from openpyxl import Workbook, load_workbook
 from openpyxl.drawing.image import Image
 
-
 # DATA_FILE = "Műszaknapló_H4_2021.xlsx"
 DATA_FILE = input("Kérem az excel file nevét amiből dolgozzak:")
 WORK_FILE = input("Kérem az excel file nevét amibe dolgozzak:")
@@ -15,13 +14,11 @@ if DATA_FILE == "":
 if WORK_FILE == "":
     WORK_FILE = "tuloracsoportos.xlsx"
 
-
-
 tol = 6
 ig = 14
 ora = 8
-erend_cod = 2
-erend_cod2 = 1
+elrend_cod = 2
+elrend_cod2 = 1
 
 if muszak == 1:
     tol = 6
@@ -67,9 +64,9 @@ for row in range(a, 59):
     uj_adat = [tsz, name, nap, tol, ig, 8, 2, "", "", "", "", 1]
 
     if c == 25:
-        png_loc = "matra.jpg"
-        my_png = openpyxl.drawing.image.Image(png_loc)
-        lapp.add_image(my_png, 'A1')
+        Kep = "matra.jpg"
+        my_png = openpyxl.drawing.image.Image(Kep)
+        lapp.add_image(Kep, 'A1')
 
         tulora.save(f"tulora_aktualis{sorszam}.xlsx")
 
@@ -91,11 +88,11 @@ for row in range(b, 35):
     tol = ws[f"E{b}"] = ""
     ig = ws[f"F{b}"] = ""
     ora = ws[f"G{b}"] = ""
-    erend_cod = ws[f"H{b}"] = ""
-    erend_cod2 = ws[f"M{b}"] = ""
+    elrend_cod = ws[f"H{b}"] = ""
+    elrend_cod2 = ws[f"M{b}"] = ""
 
 
-    uj_adat = [tsz, name, nap, tol, ig, ora, erend_cod, "", "", "", "", erend_cod2]
+    uj_adat = [tsz, name, nap, tol, ig, ora, elrend_cod, "", "", "", "", elrend_cod2]
 
 
     for row in lapp[f"b{b}": f"m{b}"]:
@@ -103,13 +100,6 @@ for row in range(b, 35):
             cell.value = uj_adat[index]
             print(c, b)
 
-# wb = load_workbook('test.xlsx')
-# ws = wb.active
-# png_loc = "matra.jpg"
-#
-# my_png = openpyxl.drawing.image.Image(png_loc)
-# lapp.add_image(my_png, 'A1')
-# wb.save('test.xlsx')
 
 tulora.save(f"tulora_aktualis{sorszam+1}.xlsx")
 
